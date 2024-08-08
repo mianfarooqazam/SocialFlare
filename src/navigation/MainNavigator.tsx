@@ -21,19 +21,19 @@ const MainNavigation = () => {
 
           if (route.name === 'Crowd') {
             iconName = focused ? 'account-group' : 'account-group-outline';
-            color = '#FF6B6B'; // Red
+            color = '#7C00FE';
           } else if (route.name === 'Social') {
             iconName = focused ? 'chat' : 'chat-outline';
-            color = '#4ECDC4'; // Teal
+            color = '#4ECDC4'; 
           } else if (route.name === 'Home') {
             iconName = focused ? 'home' : 'home-outline';
-            color = '#FFD93D'; // Yellow
+            color = '#FFD93D'; 
           } else if (route.name === 'Notifications') {
             iconName = focused ? 'bell' : 'bell-outline';
-            color = '#6E44FF'; // Purple
+            color = '#6E44FF'; 
           } else if (route.name === 'Profile') {
             iconName = focused ? 'account' : 'account-outline';
-            color = '#FF8C42'; // Orange
+            color = '#FF8C42'; 
           }
 
           return <Icon name={iconName} size={size} color={color} />;
@@ -45,7 +45,7 @@ const MainNavigation = () => {
     >
       <Tab.Screen name="Crowd" component={CrowdScreen} />
       <Tab.Screen name="Social" component={SocialScreen} />
-      <Tab.Screen 
+      {/* <Tab.Screen 
         name="Home" 
         component={HomeScreen}
         options={{
@@ -64,7 +64,9 @@ const MainNavigation = () => {
             </View>
           ),
         }}
-      />
+      /> */}
+            <Tab.Screen name="Home" component={HomeScreen} />
+
       <Tab.Screen name="Notifications" component={NotificationsScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
