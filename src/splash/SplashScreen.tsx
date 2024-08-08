@@ -1,9 +1,18 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const { width, height } = Dimensions.get('window');
 
-const SplashScreen = ({ onLogin }) => {
+const SplashScreen = () => {
+    const navigation = useNavigation();
+
+    const handleLogin = () => {
+        navigation.reset({
+            index: 0,
+            routes: [{ name: 'Main' }],
+        });
+    };
     return (
         <View style={styles.container}>
             <Image
@@ -19,7 +28,7 @@ const SplashScreen = ({ onLogin }) => {
                 <TouchableOpacity>
                     <Text style={styles.signupText}>Sign Up</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.loginButton} onPress={onLogin}>
+                <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
                     <Text style={styles.loginText}>Login</Text>
                 </TouchableOpacity>
             </View>

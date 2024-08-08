@@ -11,20 +11,9 @@ const Stack = createStackNavigator();
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
-  const [showSplashScreen, setShowSplashScreen] = useState(false);
-
-  useEffect(() => {
-    if (!isLoading && !showSplashScreen) {
-      setShowSplashScreen(true);
-    }
-  }, [isLoading, showSplashScreen]);
 
   const handleSplashFinish = () => {
     setIsLoading(false);
-  };
-
-  const handleLogin = () => {
-    setShowSplashScreen(false);
   };
 
   if (isLoading) {
@@ -41,13 +30,8 @@ export default function App() {
                 headerShown: false
               }}
             >
-              {showSplashScreen ? (
-                <Stack.Screen name="SplashScreen">
-                  {(props) => <SplashScreen {...props} onLogin={handleLogin} />}
-                </Stack.Screen>
-              ) : (
-                <Stack.Screen name="Main" component={MainNavigation} />
-              )}
+              <Stack.Screen name="SplashScreen" component={SplashScreen} />
+              <Stack.Screen name="Main" component={MainNavigation} />
             </Stack.Navigator>
           </View>
         </SafeAreaView>

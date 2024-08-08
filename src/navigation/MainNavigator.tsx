@@ -1,5 +1,4 @@
 import React from 'react';
-import { View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -45,27 +44,8 @@ const MainNavigation = () => {
     >
       <Tab.Screen name="Crowd" component={CrowdScreen} />
       <Tab.Screen name="Social" component={SocialScreen} />
-      {/* <Tab.Screen 
-        name="Home" 
-        component={HomeScreen}
-        options={{
-          tabBarIcon: ({ focused, size }) => (
-            <View style={{
-              backgroundColor: '#FFD93D',
-              borderRadius: size,
-              padding: 5,
-              marginBottom: 25, // Adjust this value to position the icon
-            }}>
-              <Icon 
-                name={focused ? 'home' : 'home-outline'} 
-                size={size * 1.5} 
-                color="#FFFFFF"
-              />
-            </View>
-          ),
-        }}
-      /> */}
-            <Tab.Screen name="Home" component={HomeScreen} />
+    
+           <Tab.Screen name="Home" component={HomeScreen} />
 
       <Tab.Screen name="Notifications" component={NotificationsScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
