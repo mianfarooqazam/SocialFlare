@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { View, SafeAreaView, Platform, StatusBar } from 'react-native';
-import { StatusBar as ExpoStatusBar } from 'expo-status-bar';
+import React, { useState } from 'react';
+import { View, StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Splash from './src/splash/Splash';
@@ -22,20 +21,16 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <View style={{ flex: 1, backgroundColor: '#f3ee76' }}>
-        <SafeAreaView style={{ flex: 1 }}>
-          <View style={{ flex: 1, paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0 }}>
-            <Stack.Navigator
-              screenOptions={{
-                headerShown: false
-              }}
-            >
-              <Stack.Screen name="SplashScreen" component={SplashScreen} />
-              <Stack.Screen name="Main" component={MainNavigation} />
-            </Stack.Navigator>
-          </View>
-        </SafeAreaView>
-        <ExpoStatusBar style="dark" backgroundColor="#f3ee76" />
+      <View style={{ flex: 1 }}>
+        <StatusBar backgroundColor="#f3ee76" barStyle="dark-content" />
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false
+          }}
+        >
+          <Stack.Screen name="SplashScreen" component={SplashScreen} />
+          <Stack.Screen name="Main" component={MainNavigation} />
+        </Stack.Navigator>
       </View>
     </NavigationContainer>
   );

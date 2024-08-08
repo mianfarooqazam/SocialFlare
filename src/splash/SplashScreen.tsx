@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity, SafeAreaView, StatusBar } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const { width, height } = Dimensions.get('window');
@@ -13,30 +13,38 @@ const SplashScreen = () => {
             routes: [{ name: 'Main' }],
         });
     };
+
     return (
-        <View style={styles.container}>
-            <Image
-                source={require('../../assets/361-1.png')}
-                style={styles.logo}
-                resizeMode="cover"
-            />
-            <View style={styles.textContainer}>
-                <Text style={styles.title}>Social Flare</Text>
-                <Text style={styles.desc}>See Where The Crowd Is And Join The Excitement 🥳</Text>
+        <SafeAreaView style={styles.safeArea}>
+            <StatusBar backgroundColor="#f3ee76" barStyle="dark-content" />
+            <View style={styles.container}>
+                <Image
+                    source={require('../../assets/361-1.png')}
+                    style={styles.logo}
+                    resizeMode="cover"
+                />
+                <View style={styles.textContainer}>
+                    <Text style={styles.title}>Social Flare</Text>
+                    <Text style={styles.desc}>See Where The Crowd Is And Join The Excitement 🥳</Text>
+                </View>
+                <View style={styles.authContainer}>
+                    <TouchableOpacity>
+                        <Text style={styles.signupText}>Sign Up</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
+                        <Text style={styles.loginText}>Login</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
-            <View style={styles.authContainer}>
-                <TouchableOpacity>
-                    <Text style={styles.signupText}>Sign Up</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
-                    <Text style={styles.loginText}>Login</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
+        </SafeAreaView>
     );
 };
 
 const styles = StyleSheet.create({
+    safeArea: {
+        flex: 1,
+        backgroundColor: '#f3ee76',
+    },
     container: {
         flex: 1,
         justifyContent: 'flex-start',
