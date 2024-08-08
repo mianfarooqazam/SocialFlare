@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
-// import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import MapView from 'react-native-maps';
 
 const CrowdScreen = () => {
@@ -8,14 +7,14 @@ const CrowdScreen = () => {
     <View style={styles.container}>
       <Text style={styles.title}>Crowd Screen</Text>
       <MapView
-      style={{width:"100%",height:"100%"}}
-  initialRegion={{
-    latitude: 37.78825,
-    longitude: -122.4324,
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421,
-  }}
-/>
+        style={{width:"100%",height:"100%"}}
+        initialRegion={{
+          latitude: 33.72939,
+          longitude: 73.09315,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        }}
+      />
     </View>
   );
 };

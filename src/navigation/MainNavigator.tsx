@@ -49,9 +49,9 @@ const MainNavigation = () => {
           headerTitleStyle: { fontWeight: 'bold' },
         })}
       >
-        <Tab.Screen name="Home" component={HomeScreen}  />
         <Tab.Screen name="Crowd" component={CrowdScreen} />
         <Tab.Screen name="Social" component={SocialScreen} />
+        <Tab.Screen name="Home" component={HomeScreen}  />
         <Tab.Screen name="Notifications" component={NotificationsScreen} />
         <Tab.Screen name="Profile" component={ProfileScreen} />
       </Tab.Navigator>
