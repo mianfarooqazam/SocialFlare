@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
         textAlign: 'left',
         fontWeight: '600',
         fontFamily: 'Helvetica Neue',
-        marginBottom: 5, // Space between subtitle lines
+        marginBottom: 5, 
     },
     desc: {
         fontSize: 20,
