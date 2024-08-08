@@ -1,21 +1,21 @@
 import React from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+// import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import MapView from 'react-native-maps';
 
 const CrowdScreen = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Crowd Screen</Text>
       <MapView
-        style={styles.map}
-        provider={PROVIDER_GOOGLE}
-        initialRegion={{
-          latitude: 33.6844,
-          longitude: 73.0479,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}
-      />
+      style={{width:"100%",height:"100%"}}
+  initialRegion={{
+    latitude: 37.78825,
+    longitude: -122.4324,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421,
+  }}
+/>
     </View>
   );
 };
