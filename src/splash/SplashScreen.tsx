@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image, Dimensions, TouchableOpacity } from 'rea
 
 const { width, height } = Dimensions.get('window');
 
-const SplashScreen = () => {
+const SplashScreen = ({ onLogin }) => {
     return (
         <View style={styles.container}>
             <Image
@@ -13,19 +13,13 @@ const SplashScreen = () => {
             />
             <View style={styles.textContainer}>
                 <Text style={styles.title}>Social Flare</Text>
-                
-                {/* <View style={styles.subtitleContainer}>
-                    <Text style={styles.subtitle}>Feel the flare</Text>
-                    <Text style={styles.subtitle}>Find the fun</Text>
-                </View> */}
-
                 <Text style={styles.desc}>See Where The Crowd Is And Join The Excitement 🥳</Text>
             </View>
             <View style={styles.authContainer}>
                 <TouchableOpacity>
                     <Text style={styles.signupText}>Sign Up</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.loginButton}>
+                <TouchableOpacity style={styles.loginButton} onPress={onLogin}>
                     <Text style={styles.loginText}>Login</Text>
                 </TouchableOpacity>
             </View>
