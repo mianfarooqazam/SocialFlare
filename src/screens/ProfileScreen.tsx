@@ -1,68 +1,90 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import { Button, Card, Text, Switch, Divider, Avatar } from 'react-native-paper';
+import ReusableModal from '../components/ReusableModal';
 
 const ProfileScreen = () => {
   const [isIncognito, setIsIncognito] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalTitle, setModalTitle] = useState('');
+
+  const openModal = (title) => {
+    setModalTitle(title);
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+  };
+
+  const renderButton = (title) => (
+    <Button
+      mode="contained"
+      style={styles.button}
+      onPress={() => openModal(title)}
+    >
+      {title}
+    </Button>
+  );
 
   return (
-    <View style={styles.container}>
-      <Avatar.Image size={120} source={require('../../assets/profile.png')} />
-      <Text style={styles.name}>Haleema Sultan</Text>
+    <ScrollView style={styles.container}>
+      <View style={styles.content}>
+        <Avatar.Image size={120} source={require('../../assets/profile.png')} />
+        <Text style={styles.name}>Haleema Sultan</Text>
 
-      <View style={styles.cardsContainer}>
-  <Card style={styles.card}>
-    <Card.Content style={styles.cardContent}>
-      <Text variant="titleMedium" style={styles.cardTitle}>Today's Stalkers</Text>
-      <Text variant="displayMedium" style={styles.cardValue}>42</Text>
-    </Card.Content>
-  </Card>
-  <Card style={styles.card}>
-    <Card.Content style={styles.cardContent}>
-      <Text variant="titleMedium" style={styles.cardTitle}>Stalker Score</Text>
-      <Text variant="displayMedium" style={styles.cardValue}>87</Text>
-    </Card.Content>
-  </Card>
-</View>
+        <View style={styles.cardsContainer}>
+          <Card style={styles.card}>
+            <Card.Content style={styles.cardContent}>
+              <Text variant="titleMedium" style={styles.cardTitle}>Today's Stalkers</Text>
+              <Text variant="displayMedium" style={styles.cardValue}>42</Text>
+            </Card.Content>
+          </Card>
+          <Card style={styles.card}>
+            <Card.Content style={styles.cardContent}>
+              <Text variant="titleMedium" style={styles.cardTitle}>Stalker Score</Text>
+              <Text variant="displayMedium" style={styles.cardValue}>87</Text>
+            </Card.Content>
+          </Card>
+        </View>
 
-      <Divider style={styles.divider} />
+        <Divider style={styles.divider} />
 
-      <View style={styles.buttonGroup}>
-        <Button mode="outlined" style={styles.button}>Personal Information</Button>
-        <Button mode="outlined" style={styles.button}>Privacy Settings</Button>
-        <Button mode="outlined" style={styles.button}>Settings</Button>
+        <View style={styles.buttonGroup}>
+          {renderButton('Personal Information')}
+          {renderButton('Privacy Settings')}
+          {renderButton('Settings')}
+          {renderButton('Payments')}
+          {renderButton('Customer Support')}
+          {renderButton('Terms & Conditions')}
+          {renderButton('Member ID: #12345')}
+        </View>
+
+        <View style={styles.incognitoContainer}>
+          <Text>Incognito Mode</Text>
+          <Switch value={isIncognito} onValueChange={() => setIsIncognito(!isIncognito)} />
+        </View>
+
+        <Button mode="contained" style={styles.logoutButton}>Logout</Button>
       </View>
 
-      <Divider style={styles.divider} />
-
-      <View style={styles.buttonGroup}>
-        <Button mode="outlined" style={styles.button}>Payments</Button>
-        <Button mode="outlined" style={styles.button}>Customer Support</Button>
-      </View>
-
-      <Divider style={styles.divider} />
-
-      <View style={styles.buttonGroup}>
-        <Button mode="outlined" style={styles.button}>Terms & Conditions</Button>
-        <Button mode="outlined" style={styles.button}>Member ID: #12345</Button>
-      </View>
-
-      <View style={styles.incognitoContainer}>
-        <Text>Incognito Mode</Text>
-        <Switch value={isIncognito} onValueChange={() => setIsIncognito(!isIncognito)} />
-      </View>
-
-      <Button mode="contained" style={styles.logoutButton}>Logout</Button>
-    </View>
+      <ReusableModal
+        visible={modalVisible}
+        onDismiss={closeModal}
+        title={modalTitle}
+      />
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#f5f5f5',
+  },
+  content: {
     padding: 16,
     alignItems: 'center',
-    backgroundColor: '#f5f5f5',
   },
   name: {
     fontSize: 24,
@@ -98,15 +120,15 @@ const styles = StyleSheet.create({
     marginVertical: 16,
   },
   buttonGroup: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
     width: '100%',
+    gap: 15,
   },
   button: {
-    marginBottom: 8,
-    width: '48%',
-    borderColor: '#6200ee',
+    width: '100%',
+    borderColor: '#57a4ff',
+    backgroundColor: "#57a4ff",
+    borderRadius: 5,
+    
   },
   incognitoContainer: {
     flexDirection: 'row',
@@ -117,8 +139,9 @@ const styles = StyleSheet.create({
   },
   logoutButton: {
     width: '100%',
-    marginTop: 16,
-    backgroundColor: '#6200ee',
+    borderColor: '#ff0000',
+    backgroundColor: "#ff0000",
+    borderRadius: 5,
   },
 });
 
