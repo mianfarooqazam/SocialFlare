@@ -34,18 +34,18 @@ const NotificationsScreen = () => {
 
   const getIcon = (type) => {
     switch (type) {
-      case 'like': return { name: 'heart', color: '#FF69B4' };  // Hot Pink
-      case 'comment': return { name: 'comment', color: '#1E90FF' };  // Dodger Blue
-      case 'follow': return { name: 'account-plus', color: '#32CD32' };  // Lime Green
-      case 'mention': return { name: 'at', color: '#FF8C00' };  // Dark Orange
-      case 'friendRequest': return { name: 'account', color: '#8A2BE2' };  // Blue Violet
-      case 'profile': return { name: 'eye', color: '#20B2AA' };  // Light Sea Green
-      case 'tag': return { name: 'tag', color: '#FF6347' };  // Tomato
-      case 'story': return { name: 'book-open-variant', color: '#4169E1' };  // Royal Blue
-      case 'message': return { name: 'message', color: '#00CED1' };  // Dark Turquoise
-      case 'event': return { name: 'calendar', color: '#BA55D3' };  // Medium Orchid
-      case 'stalkedScore': return { name: 'trophy', color: '#FFD700' };  // Gold
-      default: return { name: 'bell', color: '#A9A9A9' };  // Dark Gray
+      case 'like': return { name: 'heart', color: '#FF69B4' };  
+      case 'comment': return { name: 'comment', color: '#1E90FF' };  
+      case 'follow': return { name: 'account-plus', color: '#32CD32' };  
+      case 'mention': return { name: 'at', color: '#FF8C00' };  
+      case 'friendRequest': return { name: 'account', color: '#8A2BE2' }; 
+      case 'profile': return { name: 'eye', color: '#20B2AA' }; 
+      case 'tag': return { name: 'tag', color: '#FF6347' };  
+      case 'story': return { name: 'book-open-variant', color: '#4169E1' };  
+      case 'message': return { name: 'message', color: '#00CED1' };  
+      case 'event': return { name: 'calendar', color: '#BA55D3' };  
+      case 'stalkedScore': return { name: 'trophy', color: '#FFD700' };  
+      default: return { name: 'bell', color: '#A9A9A9' };  
     }
   };
 
