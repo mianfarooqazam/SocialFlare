@@ -2,6 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Badge } from 'react-native-paper';
 
 import HomeScreen from '../screens/HomeScreen';
 import CrowdScreen from '../screens/CrowdScreen';
@@ -34,6 +35,23 @@ const MainNavigation = () => {
             } else if (route.name === 'Notifications') {
               iconName = focused ? 'bell' : 'bell-outline';
               color = '#6E44FF'; 
+              return (
+                <View>
+                  <Icon name={iconName} size={size} color={color} />
+                  <Badge
+                    visible={true}
+                    size={16}
+                    style={{
+                      position: 'absolute',
+                      top: -5,
+                      right: -10,
+                      backgroundColor: color,
+                    }}
+                  >
+                    7
+                  </Badge>
+                </View>
+              );
             } else if (route.name === 'Profile') {
               iconName = focused ? 'account' : 'account-outline';
               color = '#FF8C42'; 
