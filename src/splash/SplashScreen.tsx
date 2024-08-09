@@ -29,10 +29,10 @@ const SplashScreen = () => {
                 </View>
                 <View style={styles.authContainer}>
                     <TouchableOpacity>
-                        <Text style={styles.signupText}>Sign Up</Text>
+                        <Text style={styles.signupText}>SIGN UP</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
-                        <Text style={styles.loginText}>Login</Text>
+                        <Text style={styles.loginText}>LOGIN</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -94,18 +94,18 @@ const styles = StyleSheet.create({
     },
     signupText: {
         fontWeight: 'bold',
-        fontSize: 20,
+        fontSize: 18,
         fontFamily: 'Helvetica Neue',
     },
     loginButton: {
-        backgroundColor: "#000",
+        // backgroundColor: "#000",
         borderRadius: 5,
     },
     loginText: {
         fontWeight: 'bold',
-        fontSize: 20,
+        fontSize: 18,
         fontFamily: 'Helvetica Neue',
-        color: '#fff',
+        color: '#000',
         padding: 10
     },
     authText: {
