@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import MapView, { Region } from 'react-native-maps';
-import { Modal, Portal, Button, Provider as PaperProvider } from 'react-native-paper';
+import { Provider as PaperProvider } from 'react-native-paper';
+import Toast from 'react-native-toast-message';
 
 const CrowdScreen = () => {
   const islamabadRegion: Region = {
@@ -12,12 +13,6 @@ const CrowdScreen = () => {
   };
 
   const [region, setRegion] = useState(islamabadRegion);
-  const [visible, setVisible] = useState(false);
-
-  const hideModal = () => {
-    setVisible(false);
-    setRegion(islamabadRegion);
-  };
 
   const onRegionChangeComplete = (newRegion: Region) => {
     // Define the boundaries of Islamabad
@@ -32,8 +27,14 @@ const CrowdScreen = () => {
       newRegion.longitude < minLong ||
       newRegion.longitude > maxLong
     ) {
-      // If the new region is outside Islamabad, show the modal
-      setVisible(true);
+      // If the new region is outside Islamabad, show toast and reset to initial region
+      Toast.show({
+        type: 'info',
+        text1: 'This service is for Islamabad only',
+        position: 'bottom',
+        visibilityTime: 2000,
+      });
+      setRegion(islamabadRegion);
     } else {
       setRegion(newRegion);
     }
@@ -48,15 +49,8 @@ const CrowdScreen = () => {
           region={region}
           onRegionChangeComplete={onRegionChangeComplete}
         />
-        <Portal>
-          <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={styles.modalContainer}>
-            <Text style={styles.modalText}>This service is for Islamabad only</Text>
-            <Button mode="contained" onPress={hideModal} style={styles.button}>
-              OK
-            </Button>
-          </Modal>
-        </Portal>
       </View>
+      <Toast />
     </PaperProvider>
   );
 };
@@ -74,22 +68,6 @@ const styles = StyleSheet.create({
   map: {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height * 0.7,
-  },
-  modalContainer: {
-    backgroundColor: 'white',
-    padding: 20,
-    margin: 20,
-    borderRadius: 10,
-    alignItems: 'center',
-  },
-  modalText: {
-    fontSize: 20,
-    marginBottom: 20,
-    textAlign: 'center',
-    fontFamily: 'Helvetica Neue',
-  },
-  button: {
-    marginTop: 10,
   },
 });
 
