@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Dimensions } from 'react-native';
-import MapView, { Region } from 'react-native-maps';
+import { StyleSheet, SafeAreaView } from 'react-native';
+import MapView, { Region, Circle } from 'react-native-maps';
 import { Provider as PaperProvider } from 'react-native-paper';
 import Toast from 'react-native-toast-message';
 
@@ -13,6 +13,15 @@ const CrowdScreen = () => {
   };
 
   const [region, setRegion] = useState(islamabadRegion);
+
+  // 5 fixed heatmap points
+  const heatmapData = [
+    { latitude: 33.72939, longitude: 73.09315, weight: 1 },    // Center
+    { latitude: 33.73939, longitude: 73.10315, weight: 0.8 },  // Northeast
+    { latitude: 33.71939, longitude: 73.08315, weight: 0.6 },  // Southwest
+    { latitude: 33.73439, longitude: 73.08815, weight: 0.4 },  // Northwest
+    { latitude: 33.72439, longitude: 73.09815, weight: 0.2 },  // Southeast
+  ];
 
   const onRegionChangeComplete = (newRegion: Region) => {
     // Define the boundaries of Islamabad
@@ -40,17 +49,35 @@ const CrowdScreen = () => {
     }
   };
 
+  const getColor = (weight) => {
+    const colors = ["#79BC6A", "#BBCF4C", "#EEC20B", "#F29305", "#E50000"];
+    const index = Math.floor(weight * (colors.length - 1));
+    return colors[index];
+  };
+
   return (
     <PaperProvider>
-      <View style={styles.container}>
-        <Text style={styles.title}>Crowd Screen</Text>
+      <SafeAreaView style={styles.container}>
         <MapView
-          style={{width:"100%", height:"100%"}}
+          style={styles.map}
           region={region}
           onRegionChangeComplete={onRegionChangeComplete}
-        />
-      </View>
-      <Toast />
+        >
+          {heatmapData.map((point, index) => (
+            <Circle
+              key={index}
+              center={{
+                latitude: point.latitude,
+                longitude: point.longitude,
+              }}
+              radius={500 + point.weight * 1000}
+              fillColor={`${getColor(point.weight)}70`} // 70 is for 44% opacity
+              strokeColor="transparent"
+            />
+          ))}
+        </MapView>
+        <Toast />
+      </SafeAreaView>
     </PaperProvider>
   );
 };
@@ -58,16 +85,9 @@ const CrowdScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: 20,
-    marginBottom: 20,
   },
   map: {
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height * 0.7,
+    ...StyleSheet.absoluteFillObject,
   },
 });
 
