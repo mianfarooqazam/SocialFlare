@@ -20,18 +20,17 @@ const NotificationsScreen = () => {
   ]);
 
 
- useEffect(() => {
-  const unreadCount = notifications.filter(n => n.unread && n.type !== 'stalkedScore').length;
-  if (unreadCount > 0) {
-    Toast.show({
-      type: 'info',
-      text1: `${unreadCount} New Notification${unreadCount > 1 ? 's' : ''}`,
-      position: 'top',
-      visibilityTime: 4000,
-      autoHide: true,
-    });
-  }
-}, []);
+  useEffect(() => {
+    const unreadCount = notifications.filter(n => n.unread && n.type !== 'stalkedScore').length;
+    if (unreadCount > 0) {
+      Toast.show({
+        type: 'info',
+        text1: `${unreadCount} New Notification${unreadCount > 1 ? 's' : ''}`,
+        position: 'bottom',
+        visibilityTime: 2000,
+      });
+    }
+  }, []);
 
   const getIcon = (type) => {
     switch (type) {
@@ -129,23 +128,7 @@ const NotificationsScreen = () => {
           keyExtractor={item => item.id}
         />
       </View>
-      <Toast 
-        config={{
-          info: (props) => (
-            <View style={{ 
-              height: 40, 
-              width: '80%', 
-              backgroundColor: '#1E90FF',
-              borderRadius: 10,
-              padding: 10,
-              justifyContent: 'center',
-              alignItems: 'center'
-            }}>
-              <Text style={{color: 'white', fontWeight: 'bold'}}>{props.text1}</Text>
-            </View>
-          ),
-        }}
-      />
+      <Toast />
     </SafeAreaView>
   );
 };
