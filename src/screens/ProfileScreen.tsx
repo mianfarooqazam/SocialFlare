@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
-import { Button, Card, Text, Switch, Divider, Avatar } from 'react-native-paper';
+import { Button, Card, Text, Switch, Divider, Avatar, Icon } from 'react-native-paper';
 import ReusableModal from '../components/ReusableModal';
 
 const ProfileScreen = () => {
@@ -17,10 +17,11 @@ const ProfileScreen = () => {
     setModalVisible(false);
   };
 
-  const renderButton = (title) => (
+  const renderButton = (title, iconName) => (
     <Button
       mode="contained"
       style={styles.button}
+      icon={() => <Icon source={iconName} size={20} color="white" />}
       onPress={() => openModal(title)}
     >
       {title}
@@ -51,13 +52,13 @@ const ProfileScreen = () => {
         <Divider style={styles.divider} />
 
         <View style={styles.buttonGroup}>
-          {renderButton('Personal Information')}
-          {renderButton('Privacy Settings')}
-          {renderButton('Settings')}
-          {renderButton('Payments')}
-          {renderButton('Customer Support')}
-          {renderButton('Terms & Conditions')}
-          {renderButton('Member ID: #12345')}
+          {renderButton('Personal Information', 'account')}
+          {renderButton('Privacy Settings', 'shield-account')}
+          {renderButton('Settings', 'cog')}
+          {renderButton('Payments', 'credit-card')}
+          {renderButton('Customer Support', 'headphones')}
+          {renderButton('Terms & Conditions', 'file-document')}
+          {renderButton('Member ID: #12345', 'card-account-details')}
         </View>
 
         <View style={styles.incognitoContainer}>
@@ -65,7 +66,13 @@ const ProfileScreen = () => {
           <Switch value={isIncognito} onValueChange={() => setIsIncognito(!isIncognito)} />
         </View>
 
-        <Button mode="contained" style={styles.logoutButton}>Logout</Button>
+        <Button 
+          mode="contained" 
+          style={styles.logoutButton}
+          icon={() => <Icon source="logout" size={20} color="white" />}
+        >
+          Logout
+        </Button>
       </View>
 
       <ReusableModal
@@ -76,11 +83,10 @@ const ProfileScreen = () => {
     </ScrollView>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: 'yellow',
   },
   content: {
     padding: 16,
