@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
 import { List, Avatar, Title, IconButton, Text } from 'react-native-paper';
 import { SwipeListView } from 'react-native-swipe-list-view';
+import Toast from 'react-native-toast-message';
 
 const NotificationsScreen = () => {
   const [notifications, setNotifications] = useState([
@@ -17,6 +18,20 @@ const NotificationsScreen = () => {
     { id: '10', type: 'event', user: 'Mia', action: 'invited you to an event', time: '5d', avatar: 'https://i.pravatar.cc/150?img=10', unread: false },
     { id: '11', type: 'stalkedScore', user: 'SocialApp', action: 'Your stalked score has reached 100! Congratulations!', time: 'Just now', avatar: 'https://i.pravatar.cc/150?img=11', unread: true },
   ]);
+
+
+ useEffect(() => {
+  const unreadCount = notifications.filter(n => n.unread && n.type !== 'stalkedScore').length;
+  if (unreadCount > 0) {
+    Toast.show({
+      type: 'info',
+      text1: `${unreadCount} New Notification${unreadCount > 1 ? 's' : ''}`,
+      position: 'top',
+      visibilityTime: 4000,
+      autoHide: true,
+    });
+  }
+}, []);
 
   const getIcon = (type) => {
     switch (type) {
@@ -100,19 +115,38 @@ const NotificationsScreen = () => {
   );
 
   return (
-    <View style={styles.container}>
-      <Title style={styles.title}>Notifications</Title>
-      <SwipeListView
-        data={notifications}
-        renderItem={renderItem}
-        renderHiddenItem={renderHiddenItem}
-        rightOpenValue={-75}
-        previewRowKey={'0'}
-        previewOpenValue={-40}
-        previewOpenDelay={3000}
-        keyExtractor={item => item.id}
+    <SafeAreaView style={styles.container}>
+      <View style={styles.content}>
+        <Title style={styles.title}>Notifications</Title>
+        <SwipeListView
+          data={notifications}
+          renderItem={renderItem}
+          renderHiddenItem={renderHiddenItem}
+          rightOpenValue={-75}
+          previewRowKey={'0'}
+          previewOpenValue={-40}
+          previewOpenDelay={3000}
+          keyExtractor={item => item.id}
+        />
+      </View>
+      <Toast 
+        config={{
+          info: (props) => (
+            <View style={{ 
+              height: 40, 
+              width: '80%', 
+              backgroundColor: '#1E90FF',
+              borderRadius: 10,
+              padding: 10,
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}>
+              <Text style={{color: 'white', fontWeight: 'bold'}}>{props.text1}</Text>
+            </View>
+          ),
+        }}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -121,10 +155,14 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
+  content: {
+    flex: 1,
+  },
   title: {
     padding: 16,
     fontSize: 24,
     fontWeight: 'bold',
+    textAlign:'center',
   },
   rightContent: {
     flexDirection: 'row',
